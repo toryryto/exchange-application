@@ -9,14 +9,9 @@ export function Router() {
 		<Routes>
 			<Route path='/login' element={<LoginPage />} />
 
-			<Route
-				path='/'
-				element={
-					<ProtectedRoute>
-						<HomePage />
-					</ProtectedRoute>
-				}
-			/>
+			<Route element={<ProtectedRoute />}>
+				<Route path='/' element={<HomePage />} />
+			</Route>
 		</Routes>
 	);
 }
