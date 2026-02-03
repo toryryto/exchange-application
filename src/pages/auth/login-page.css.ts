@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 
-import { flexCenter, flexColumn } from '@/styles/flex.css';
+import { flexColumn, flexCenter } from '@/shared/styles/flex.css';
 
 const section = style([
 	flexColumn,
