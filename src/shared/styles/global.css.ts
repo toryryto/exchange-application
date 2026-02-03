@@ -20,3 +20,8 @@ globalStyle('body', {
 globalStyle('#root', {
 	height: 'inherit',
 });
+
+globalStyle('a', {
+	color: '#252525',
+	textDecoration: 'none',
+});

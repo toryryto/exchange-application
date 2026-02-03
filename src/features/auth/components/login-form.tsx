@@ -8,7 +8,7 @@ import { useAuth } from '../hooks/useAuth';
 
 import { loginFormStyles as styles } from './login-form.css';
 
-import { Spinner } from '@/shared/components/spinner/spinner';
+import { Spinner } from '@/shared/components/ui/spinner/spinner';
 
 export function LoginForm() {
 	const navigate = useNavigate();
