@@ -1,6 +1,7 @@
 import { style } from '@vanilla-extract/css';
 
 export const wrap = style({
+	width: 220,
 	padding: 16,
 	border: '1px solid #e5e5e5',
 	borderRadius: 8,
