@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { WalletAPI, type Wallet } from '@/features/wallet/apis';
+import { WalletAPI, type WalletSummary, type WalletBalance } from '@/features/wallet/apis';
 import { MINUTE, SECOND } from '@/shared/constants/time';
 
-export type { Wallet };
+export type { WalletSummary, WalletBalance };
 
 export function useMyWallet() {
 	return useQuery({

@@ -1,8 +1,18 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { headerStyles as styles } from './header.css';
 
+import { useAuth } from '@/features/auth/hooks/useAuth';
+
 export function Header() {
+	const { logout } = useAuth();
+	const navigate = useNavigate();
+
+	const handleClickLogout = () => {
+		logout();
+		navigate('/login');
+	};
+
 	return (
 		<header className={styles.wrap}>
 			<h1 className={styles.logo}>Exchange App</h1>
@@ -29,7 +39,11 @@ export function Header() {
 						</NavLink>
 					</li>
 					<li>
-						<button type='button' className={styles.logoutButton}>
+						<button
+							type='button'
+							className={styles.logoutButton}
+							onClick={handleClickLogout}
+							aria-label='로그아웃'>
 							Log out
 						</button>
 					</li>

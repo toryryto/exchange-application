@@ -1,16 +1,38 @@
 import { instance, ApiResponse } from '@/shared/apis';
 
-export type Wallet = {
-	balances: {
-		currency: string;
-		amount: number;
-	}[];
-	totalKRW: number;
+type ApiWallet = {
+	walletId: number;
+	currency: 'KRW' | 'USD' | 'JPY';
+	balance: number;
 };
 
-const getMy = async (): Promise<Wallet> => {
-	const res = await instance.get<ApiResponse<Wallet>>('/wallet');
-	return res.data.data;
+type ApiWalletSummary = {
+	totalKrwBalance: number;
+	wallets: ApiWallet[];
+};
+
+export type WalletBalance = {
+	id: number;
+	currency: string;
+	balance: number;
+};
+
+export type WalletSummary = {
+	totalKrwBalance: number;
+	balances: WalletBalance[];
+};
+
+const getMy = async (): Promise<WalletSummary> => {
+	const res = await instance.get<ApiResponse<ApiWalletSummary>>('/wallets');
+
+	return {
+		totalKrwBalance: res.data.data.totalKrwBalance,
+		balances: res.data.data.wallets.map(wallet => ({
+			id: wallet.walletId,
+			currency: wallet.currency,
+			balance: wallet.balance,
+		})),
+	};
 };
 
 export const WalletAPI = { getMy };

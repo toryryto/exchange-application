@@ -2,6 +2,7 @@ import * as styles from './home-page.css';
 
 import { RateCard } from '@/features/exchange/components/rate/rate-card';
 import { useExchangeRates } from '@/features/exchange/hooks/useExchangeRates';
+import { WalletSummary } from '@/features/wallet/components/wallet-summary';
 
 export function HomePage() {
 	const { data: rates, isLoading, error } = useExchangeRates();
@@ -35,7 +36,7 @@ export function HomePage() {
 					</div>
 				</div>
 
-				<div className={styles.walletSection}></div>
+				<WalletSummary />
 			</div>
 
 			<div className={styles.rightSection}></div>
