@@ -47,4 +47,6 @@ export const rightSection = style({
 	border: '1px solid #e5e5e5',
 	borderRadius: 12,
 	height: 'fit-content',
+	alignSelf: 'start',
+	marginTop: 88,
 });

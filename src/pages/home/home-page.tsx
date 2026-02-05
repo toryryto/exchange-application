@@ -2,6 +2,7 @@ import * as styles from './home-page.css';
 
 import { RateCard } from '@/features/exchange/components/rate/rate-card';
 import { useExchangeRates } from '@/features/exchange/hooks/useExchangeRates';
+import { ExchangeForm } from '@/features/order/components/exchange-form';
 import { WalletSummary } from '@/features/wallet/components/wallet-summary';
 
 export function HomePage() {
@@ -39,7 +40,9 @@ export function HomePage() {
 				<WalletSummary />
 			</div>
 
-			<div className={styles.rightSection}></div>
+			<div className={styles.rightSection}>
+				<ExchangeForm />
+			</div>
 		</section>
 	);
 }
