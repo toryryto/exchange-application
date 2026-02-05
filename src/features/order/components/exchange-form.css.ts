@@ -4,6 +4,7 @@ export const wrap = style({
 	display: 'flex',
 	flexDirection: 'column',
 	gap: 24,
+	flex: 1,
 });
 
 export const header = style({
@@ -153,6 +154,7 @@ export const rateValue = style({
 });
 
 export const submitButton = style({
+	marginTop: 'auto',
 	padding: '16px 24px',
 	border: 'none',
 	borderRadius: 8,

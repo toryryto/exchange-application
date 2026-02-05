@@ -46,7 +46,7 @@ export const rightSection = style({
 	padding: 24,
 	border: '1px solid #e5e5e5',
 	borderRadius: 12,
-	height: 'fit-content',
-	alignSelf: 'start',
 	marginTop: 88,
+	display: 'flex',
+	flexDirection: 'column',
 });

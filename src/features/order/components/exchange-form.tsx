@@ -2,7 +2,9 @@ import { useState, useMemo, useId } from 'react';
 
 import * as styles from './exchange-form.css';
 
+import { useExchangeRates } from '@/features/exchange/hooks/useExchangeRates';
 import { useQuote, type Currency } from '@/features/order/hooks/useQuote';
+import { useCreateOrder, isRateMismatchError } from '@/features/order/hooks/useCreateOrder';
 
 type OrderType = 'buy' | 'sell';
 
@@ -19,6 +21,9 @@ export function ExchangeForm() {
 
 	const currencyOption = CURRENCY_OPTIONS.find(c => c.code === selectedCurrency);
 
+	const { data: rates } = useExchangeRates();
+	const selectedRate = rates?.find(r => r.currencyCode === selectedCurrency);
+
 	const quoteParams = useMemo(() => {
 		const parsedAmount = parseFloat(amount);
 		if (isNaN(parsedAmount) || parsedAmount < 0.01) return null;
@@ -30,7 +35,8 @@ export function ExchangeForm() {
 		};
 	}, [amount, orderType, selectedCurrency]);
 
-	const { data: quote, isLoading } = useQuote(quoteParams);
+	const { data: quote, isLoading: isQuoteLoading } = useQuote(quoteParams);
+	const { mutate: createOrder, isPending: isOrderPending, error: orderError } = useCreateOrder();
 
 	const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
@@ -40,11 +46,32 @@ export function ExchangeForm() {
 	};
 
 	const handleSubmit = () => {
-		if (!quote) return;
-		// TODO: 환전 주문 API 호출
-		console.log('환전 주문:', { selectedCurrency, orderType, amount, quote });
+		if (!quote || !selectedRate || !quoteParams) return;
+
+		createOrder(
+			{
+				exchangeRateId: selectedRate.id,
+				fromCurrency: quoteParams.fromCurrency,
+				toCurrency: quoteParams.toCurrency,
+				forexAmount: quoteParams.forexAmount,
+			},
+			{
+				onSuccess: () => {
+					setAmount('');
+					alert('환전이 완료되었습니다.');
+				},
+				onError: error => {
+					if (isRateMismatchError(error)) {
+						alert('환율이 변동되었습니다. 다시 시도해주세요.');
+					} else {
+						alert('환전에 실패했습니다. 다시 시도해주세요.');
+					}
+				},
+			},
+		);
 	};
 
+	const isLoading = isQuoteLoading || isOrderPending;
 	const resultLabel = orderType === 'buy' ? '필요 원화' : '받을 원화';
 	const resultSuffix = orderType === 'buy' ? '원 필요해요' : '원 받아요';
 	const inputSuffix =
@@ -137,6 +164,7 @@ export function ExchangeForm() {
 							onChange={handleAmountChange}
 							aria-describedby={amountDescId}
 							aria-invalid={amount !== '' && parseFloat(amount) < 0.01}
+							disabled={isOrderPending}
 						/>
 						<span id={amountDescId} className={styles.inputSuffix}>
 							{inputSuffix}
@@ -169,7 +197,7 @@ export function ExchangeForm() {
 						aria-labelledby={`${resultId}-label`}
 					>
 						<span className={styles.resultAmount}>
-							{isLoading
+							{isQuoteLoading
 								? '계산 중...'
 								: quote
 									? quote.krwAmount.toLocaleString('ko-KR')
@@ -210,10 +238,10 @@ export function ExchangeForm() {
 			<button
 				type='submit'
 				className={styles.submitButton}
-				disabled={!quote || isLoading}
+				disabled={!quote || isLoading || !selectedRate}
 				aria-describedby={resultId}
 			>
-				환전하기
+				{isOrderPending ? '처리 중...' : '환전하기'}
 			</button>
 		</form>
 	);

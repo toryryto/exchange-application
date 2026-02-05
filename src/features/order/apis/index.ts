@@ -18,6 +18,18 @@ export type Quote = {
 	appliedRate: number;
 };
 
+export type OrderRequest = {
+	exchangeRateId: number;
+	fromCurrency: Currency;
+	toCurrency: Currency;
+	forexAmount: number;
+};
+
+export type OrderError = {
+	code: string;
+	message: string;
+};
+
 const getQuote = async (params: QuoteParams): Promise<Quote> => {
 	const res = await instance.get<ApiResponse<ApiQuote>>('/orders/quote', {
 		params,
@@ -29,4 +41,8 @@ const getQuote = async (params: QuoteParams): Promise<Quote> => {
 	};
 };
 
-export const OrderAPI = { getQuote };
+const createOrder = async (request: OrderRequest): Promise<void> => {
+	await instance.post<ApiResponse<object>>('/orders', request);
+};
+
+export const OrderAPI = { getQuote, createOrder };
