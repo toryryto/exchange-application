@@ -1,8 +1,19 @@
 import * as styles from './home-page.css';
 
 import { RateCard } from '@/features/exchange/components/rate/rate-card';
+import { useExchangeRates } from '@/features/exchange/hooks/useExchangeRates';
 
 export function HomePage() {
+	const { data: rates, isLoading, error } = useExchangeRates();
+
+	if (isLoading) {
+		return <div>로딩 중...</div>;
+	}
+
+	if (error) {
+		return <div>환율 정보를 불러오는데 실패했습니다.</div>;
+	}
+
 	return (
 		<section className={styles.wrap}>
 			<div className={styles.leftSection}>
@@ -12,25 +23,22 @@ export function HomePage() {
 						실시간 환율을 확인하고 간편하게 환전하세요
 					</p>
 					<div className={styles.rateCards}>
-						<RateCard
-							currencyCode='USD'
-							currencyName='미국 달러'
-							rate={1320.5}
-							changePercent={0.5}
-						/>
-						<RateCard
-							currencyCode='JPY'
-							currencyName='일본 엔화'
-							rate={9.85}
-							changePercent={-1.1}
-						/>
+						{rates?.map(rate => (
+							<RateCard
+								key={rate.currencyCode}
+								currencyCode={rate.currencyCode}
+								currencyName={rate.currencyName}
+								rate={rate.rate}
+								changePercent={rate.changePercent}
+							/>
+						))}
 					</div>
 				</div>
 
 				<div className={styles.walletSection}></div>
 			</div>
 
-			<div className={styles.rightSection}>{/* TODO: 환전하기 폼 */}</div>
+			<div className={styles.rightSection}></div>
 		</section>
 	);
 }
