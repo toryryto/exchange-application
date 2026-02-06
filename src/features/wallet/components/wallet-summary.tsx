@@ -1,6 +1,7 @@
-import * as styles from './wallet-summary.css';
+import { walletSummaryStyles as styles } from './wallet-summary.css';
 
 import { useMyWallet } from '@/features/wallet/hooks/useMyWallet';
+import { Spinner } from '@/shared/components/ui/spinner/spinner';
 
 const CURRENCY_SYMBOLS: Record<string, string> = {
 	KRW: '₩',
@@ -17,7 +18,11 @@ export function WalletSummary() {
 	const { data: wallet, isLoading, error } = useMyWallet();
 
 	if (isLoading) {
-		return <div className={styles.wrap}>로딩 중...</div>;
+		return (
+			<div className={styles.wrap}>
+				<Spinner />
+			</div>
+		);
 	}
 
 	if (error) {

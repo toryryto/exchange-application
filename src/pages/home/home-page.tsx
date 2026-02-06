@@ -4,12 +4,13 @@ import { RateCard } from '@/features/exchange/components/rate/rate-card';
 import { useExchangeRates } from '@/features/exchange/hooks/useExchangeRates';
 import { ExchangeForm } from '@/features/order/components/exchange-form';
 import { WalletSummary } from '@/features/wallet/components/wallet-summary';
+import { Spinner } from '@/shared/components/ui/spinner/spinner';
 
 export function HomePage() {
 	const { data: rates, isLoading, error } = useExchangeRates();
 
 	if (isLoading) {
-		return <div>로딩 중...</div>;
+		return <Spinner />;
 	}
 
 	if (error) {

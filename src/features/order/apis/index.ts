@@ -7,6 +7,16 @@ type ApiQuote = {
 	appliedRate: number;
 };
 
+type ApiOrder = {
+	orderId: number;
+	fromCurrency: Currency;
+	fromAmount: number;
+	toCurrency: Currency;
+	toAmount: number;
+	appliedRate: number;
+	orderedAt: string;
+};
+
 export type QuoteParams = {
 	fromCurrency: Currency;
 	toCurrency: Currency;
@@ -30,6 +40,16 @@ export type OrderError = {
 	message: string;
 };
 
+export type Order = {
+	id: number;
+	fromCurrency: Currency;
+	fromAmount: number;
+	toCurrency: Currency;
+	toAmount: number;
+	appliedRate: number;
+	orderedAt: Date;
+};
+
 const getQuote = async (params: QuoteParams): Promise<Quote> => {
 	const res = await instance.get<ApiResponse<ApiQuote>>('/orders/quote', {
 		params,
@@ -45,4 +65,18 @@ const createOrder = async (request: OrderRequest): Promise<void> => {
 	await instance.post<ApiResponse<object>>('/orders', request);
 };
 
-export const OrderAPI = { getQuote, createOrder };
+const getOrders = async (): Promise<Order[]> => {
+	const res = await instance.get<ApiResponse<ApiOrder[]>>('/orders');
+
+	return res.data.data.map(order => ({
+		id: order.orderId,
+		fromCurrency: order.fromCurrency,
+		fromAmount: order.fromAmount,
+		toCurrency: order.toCurrency,
+		toAmount: order.toAmount,
+		appliedRate: order.appliedRate,
+		orderedAt: new Date(order.orderedAt),
+	}));
+};
+
+export const OrderAPI = { getQuote, createOrder, getOrders };

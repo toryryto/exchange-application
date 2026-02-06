@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 
-export const wrap = style({
+const wrap = style({
 	display: 'flex',
 	flexDirection: 'column',
 	padding: 24,
@@ -9,14 +9,14 @@ export const wrap = style({
 	flex: 1,
 });
 
-export const title = style({
+const title = style({
 	fontSize: 18,
 	fontWeight: 700,
 	color: '#252525',
 	marginBottom: 20,
 });
 
-export const list = style({
+const list = style({
 	display: 'flex',
 	flexDirection: 'column',
 	gap: 12,
@@ -25,7 +25,7 @@ export const list = style({
 	margin: 0,
 });
 
-export const item = style({
+const item = style({
 	display: 'flex',
 	justifyContent: 'space-between',
 	alignItems: 'center',
@@ -33,15 +33,15 @@ export const item = style({
 	color: '#252525',
 });
 
-export const currency = style({
+const currency = style({
 	color: '#6b6b6b',
 });
 
-export const amount = style({
+const amount = style({
 	fontWeight: 500,
 });
 
-export const total = style({
+const total = style({
 	display: 'flex',
 	justifyContent: 'space-between',
 	alignItems: 'center',
@@ -50,13 +50,25 @@ export const total = style({
 	borderTop: '1px solid #e5e5e5',
 });
 
-export const totalLabel = style({
+const totalLabel = style({
 	fontSize: 14,
 	color: '#6b6b6b',
 });
 
-export const totalAmount = style({
+const totalAmount = style({
 	fontSize: 18,
 	fontWeight: 700,
 	color: '#1e88e5',
 });
+
+export const walletSummaryStyles = {
+	wrap,
+	title,
+	list,
+	item,
+	currency,
+	amount,
+	total,
+	totalLabel,
+	totalAmount,
+};

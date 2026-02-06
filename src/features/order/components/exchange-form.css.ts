@@ -1,19 +1,19 @@
 import { style } from '@vanilla-extract/css';
 
-export const wrap = style({
+const wrap = style({
 	display: 'flex',
 	flexDirection: 'column',
 	gap: 24,
 	flex: 1,
 });
 
-export const header = style({
+const header = style({
 	display: 'flex',
 	alignItems: 'center',
 	gap: 8,
 });
 
-export const currencySelect = style({
+const currencySelect = style({
 	display: 'flex',
 	alignItems: 'center',
 	gap: 8,
@@ -26,12 +26,12 @@ export const currencySelect = style({
 	cursor: 'pointer',
 });
 
-export const tabs = style({
+const tabs = style({
 	display: 'flex',
 	gap: 0,
 });
 
-export const tab = style({
+const tab = style({
 	flex: 1,
 	padding: '12px 24px',
 	border: '1px solid #e5e5e5',
@@ -50,36 +50,36 @@ export const tab = style({
 	},
 });
 
-export const tabActive = style({
+const tabActive = style({
 	background: '#ef5350',
 	borderColor: '#ef5350',
 	color: '#fff',
 });
 
-export const tabSell = style({
+const tabSell = style({
 	background: '#1e88e5',
 	borderColor: '#1e88e5',
 	color: '#fff',
 });
 
-export const inputSection = style({
+const inputSection = style({
 	display: 'flex',
 	flexDirection: 'column',
 	gap: 16,
 });
 
-export const inputGroup = style({
+const inputGroup = style({
 	display: 'flex',
 	flexDirection: 'column',
 	gap: 8,
 });
 
-export const inputLabel = style({
+const inputLabel = style({
 	fontSize: 14,
 	color: '#6b6b6b',
 });
 
-export const inputWrap = style({
+const inputWrap = style({
 	display: 'flex',
 	alignItems: 'center',
 	padding: '12px 16px',
@@ -88,7 +88,7 @@ export const inputWrap = style({
 	gap: 8,
 });
 
-export const input = style({
+const input = style({
 	flex: 1,
 	border: 'none',
 	outline: 'none',
@@ -99,19 +99,19 @@ export const input = style({
 	},
 });
 
-export const inputSuffix = style({
+const inputSuffix = style({
 	fontSize: 14,
 	color: '#6b6b6b',
 	whiteSpace: 'nowrap',
 });
 
-export const arrowIcon = style({
+const arrowIcon = style({
 	display: 'flex',
 	justifyContent: 'center',
 	padding: '8px 0',
 });
 
-export const resultWrap = style({
+const resultWrap = style({
 	display: 'flex',
 	alignItems: 'center',
 	padding: '12px 16px',
@@ -120,7 +120,7 @@ export const resultWrap = style({
 	background: '#fafafa',
 });
 
-export const resultAmount = style({
+const resultAmount = style({
 	flex: 1,
 	fontSize: 16,
 	fontWeight: 500,
@@ -128,19 +128,19 @@ export const resultAmount = style({
 	color: '#252525',
 });
 
-export const resultSuffix = style({
+const resultSuffix = style({
 	fontSize: 14,
 	fontWeight: 500,
 	color: '#1e88e5',
 	marginLeft: 8,
 });
 
-export const divider = style({
+const divider = style({
 	height: 1,
 	background: '#e5e5e5',
 });
 
-export const rateInfo = style({
+const rateInfo = style({
 	display: 'flex',
 	justifyContent: 'space-between',
 	alignItems: 'center',
@@ -148,12 +148,12 @@ export const rateInfo = style({
 	color: '#6b6b6b',
 });
 
-export const rateValue = style({
+const rateValue = style({
 	fontWeight: 500,
 	color: '#252525',
 });
 
-export const submitButton = style({
+const submitButton = style({
 	marginTop: 'auto',
 	padding: '16px 24px',
 	border: 'none',
@@ -173,7 +173,7 @@ export const submitButton = style({
 	},
 });
 
-export const srOnly = style({
+const srOnly = style({
 	position: 'absolute',
 	width: 1,
 	height: 1,
@@ -184,3 +184,28 @@ export const srOnly = style({
 	whiteSpace: 'nowrap',
 	border: 0,
 });
+
+export const exchangeFormStyles = {
+	wrap,
+	header,
+	currencySelect,
+	tabs,
+	tab,
+	tabActive,
+	tabSell,
+	inputSection,
+	inputGroup,
+	inputLabel,
+	inputWrap,
+	input,
+	inputSuffix,
+	arrowIcon,
+	resultWrap,
+	resultAmount,
+	resultSuffix,
+	divider,
+	rateInfo,
+	rateValue,
+	submitButton,
+	srOnly,
+};

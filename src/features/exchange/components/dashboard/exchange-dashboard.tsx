@@ -2,12 +2,13 @@ import * as styles from './exchange-dashboard.css';
 
 import { RateCard } from '@/features/exchange/components/rate/rate-card';
 import { useExchangeRates } from '@/features/exchange/hooks/useExchangeRates';
+import { Spinner } from '@/shared/components/ui/spinner/spinner';
 
 export function ExchangeDashboard() {
 	const { data: rates, isLoading, error } = useExchangeRates();
 
 	if (isLoading) {
-		return <div>로딩 중...</div>;
+		return <Spinner />;
 	}
 
 	if (error) {

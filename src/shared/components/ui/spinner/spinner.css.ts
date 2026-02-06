@@ -17,11 +17,16 @@ const wrapper = style([
 
 const spinner = style({
 	width: 20,
-	height: '100%',
+	height: 20,
 	border: '2px solid #e5e5e5',
 	borderTop: '2px solid #666',
 	borderRadius: '50%',
 	animation: `${spin} 0.8s linear infinite`,
 });
 
-export const spinnerStyles = { wrapper, spinner };
+const text = style({
+	fontSize: 14,
+	color: '#6b6b6b',
+});
+
+export const spinnerStyles = { wrapper, spinner, text };

@@ -1,6 +1,6 @@
 import { useState, useMemo, useId } from 'react';
 
-import * as styles from './exchange-form.css';
+import { exchangeFormStyles as styles } from './exchange-form.css';
 
 import { useExchangeRates } from '@/features/exchange/hooks/useExchangeRates';
 import { useQuote, type Currency } from '@/features/order/hooks/useQuote';
